@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#070a12">
+    <title>HD Organization — Услуги и Донаты</title>
+    <!-- Подключаем современный геймерский/премиальный шрифт Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        html, body {
+            background-color: #070a12;
+            color: #f0f6fc;
+            width: 100%;
+            overflow-x: hidden;
+        }
+        
+        .hero-banner {
+            width: 100%;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.3) 0%, rgba(147, 51, 234, 0.2) 50%, rgba(7, 10, 18, 0.9) 100%), 
+                        radial-gradient(circle at top right, rgba(56, 189, 248, 0.4), transparent 60%);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+            padding: 40px 18px 32px 18px;
+            text-align: center;
+        }
+        
+        .store-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(37, 99, 235, 0.25);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #38bdf8;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .logo-placeholder {
+            width: 82px;
+            height: 82px;
+            background: linear-gradient(135deg, #2563eb, #38bdf8);
+            border-radius: 22px;
+            margin: 0 auto 14px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            box-shadow: 0 0 25px rgba(37, 99, 235, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .hero-banner h1 {
+            font-size: 26px;
+            margin-bottom: 8px;
+            color: #ffffff;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        
+        .hero-banner p {
+            font-size: 15px;
+            color: #cbd5e1;
+            line-height: 1.5;
+            max-width: 480px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .container {
+            width: 100%;
+            padding: 18px 18px 40px 18px;
+            background-color: #070a12;
+        }
+        
+        .benefits-card {
+            background: #111622;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 22px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+        .benefits-card h3 {
+            font-size: 17px;
+            color: #38bdf8;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .benefits-card p {
+            font-size: 15px;
+            color: #cbd5e1;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .section-title {
+            font-size: 17px;
+            color: #f0f6fc;
+            margin-bottom: 14px;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+        }
+        .services-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .service-dropdown {
+            background: #111622;
+            border: 1px solid #21262d;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .service-header {
+            padding: 16px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 16px;
+            color: #f8fafc;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+        }
+        .service-header-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .service-icon {
+            font-size: 20px;
+            min-width: 24px;
+            text-align: center;
+        }
+        .arrow {
+            font-size: 13px;
+            color: #94a3b8;
+            transition: transform 0.3s ease;
+        }
+        .service-dropdown.active .arrow {
+            transform: rotate(180deg);
+            color: #38bdf8;
+        }
+        
+        .price-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            background-color: #0b0f17;
+            padding: 0 18px;
+            font-size: 15px;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        .service-dropdown.active .price-content {
+            max-height: 900px;
+            padding: 16px 18px;
+            border-top: 1px solid #21262d;
+        }
+        .price-category {
+            color: #38bdf8;
+            font-weight: 700;
+            font-size: 15px;
+            margin-top: 14px;
+            margin-bottom: 6px;
+        }
+        .price-category:first-child {
+            margin-top: 0;
+        }
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 7px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+            font-weight: 500;
+        }
+        .price-note {
+            font-size: 13px;
+            color: #fbbf24;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+
+        .service-item {
+            background: #111622;
+            border: 1px solid #21262d;
+            border-radius: 12px;
+            padding: 16px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            color: #f8fafc;
+            font-weight: 600;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: #ffffff;
+            text-align: center;
+            padding: 18px;
+            border-radius: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 16px;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            margin-bottom: 20px;
+        }
+        .btn:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+        
+        footer {
+            text-align: center;
+            font-size: 13px;
+            color: #64748b;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-banner">
+        <div class="store-badge">⭐ Официальный магазин</div>
+        <div class="logo-placeholder">⚡️</div>
+        <h1>HD Organization</h1>
+        <p>Надежный сервис быстрых игровых донатов и цифровых услуг для пользователей из Туркменистана.</p>
+    </div>
+
+    <div class="container">
+        <div class="benefits-card">
+            <h3>🔥 Почему выбирают нас?</h3>
+            <p>Самые низкие цены в Туркменистане, а также самая надежная и полностью автоматизированная система обработки заказов.</p>
+        </div>
+
+        <div class="section-title">📦 Наши услуги и донаты:</div>
+        <div class="services-list">
+            
+            <div class="service-dropdown" id="mlbb-dropdown">
+                <div class="service-header" onclick="toggleDropdown('mlbb-dropdown')">
+                    <div class="service-header-content">
+                        <span class="service-icon">💎</span>
+                        <span>Mobile Legends: Bang Bang</span>
+                    </div>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="price-content">
+                    <div class="price-category">🔹 Пакеты с бонусом x2 (или стандарт):</div>
+                    <div class="price-item"><span>50+50 (без x2: 50+5)</span> <span>35 тмт</span></div>
+                    <div class="price-item"><span>150+150 (без x2: 150+15)</span> <span>70 тмт</span></div>
+                    <div class="price-item"><span>250+250 (без x2: 250+25)</span> <span>95 тмт</span></div>
+                    <div class="price-item"><span>500+500 (без x2: 500+65)</span> <span>170 тмт</span></div>
+
+                    <div class="price-category">🔹 Пропуска:</div>
+                    <div class="price-item"><span>Недельный пропуск</span> <span>35 тмт</span></div>
+                    <div class="price-item"><span>Сумеречный пропуск</span> <span>180 тмт</span></div>
+
+                    <div class="price-category">🔹 Наборы:</div>
+                    <div class="price-item"><span>Недельный элитный набор</span> <span>25 тмт</span></div>
+                    <div class="price-item"><span>Месячный эпический набор</span> <span>90 тмт</span></div>
+
+                    <div class="price-category">🔹 Стандартные алмазы:</div>
+                    <div class="price-item"><span>78+8</span> <span>40 тмт</span></div>
+                    <div class="price-item"><span>156+16</span> <span>75 тмт</span></div>
+                    <div class="price-item"><span>234+23</span> <span>90 тмт</span></div>
+                    <div class="price-item"><span>321+32</span> <span>120 тмт</span></div>
+                    <div class="price-item"><span>390+39</span> <span>150 тмт</span></div>
+                    <div class="price-item"><span>546+54</span> <span>200 тмт</span></div>
+                </div>
+            </div>
+
+            <div class="service-dropdown" id="pubg-dropdown">
+                <div class="service-header" onclick="toggleDropdown('pubg-dropdown')">
+                    <div class="service-header-content">
+                        <span class="service-icon">🎮</span>
+                        <span>PUBG Mobile</span>
+                    </div>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="price-content">
+                    <div class="price-category">💎 Популярные наборы UC:</div>
+                    <div class="price-item"><span>60 UC</span> <span>20 TMT</span></div>
+                    <div class="price-item"><span>325 UC</span> <span>110 TMT</span></div>
+                    <div class="price-item"><span>660 UC</span> <span>210 TMT</span></div>
+                    <div class="price-item"><span>1800 UC</span> <span>490 TMT</span></div>
+
+                    <div class="price-category">🎫 Пассы (RP):</div>
+                    <div class="price-item"><span>Elite Pass</span> <span>230 TMT</span></div>
+                    <div class="price-item"><span>Elite Pass Plus</span> <span>550 TMT</span></div>
+                    <div class="price-item"><span>Elite Pass (1-50 lvl)</span> <span>120 TMT</span></div>
+
+                    <div class="price-category">📦 Специальные наборы:</div>
+                    <div class="price-item"><span>First purchase pack</span> <span>25 TMT</span></div>
+                    <div class="price-item"><span>Mythic Emblem Pack</span> <span>60 TMT</span></div>
+                    <div class="price-item"><span>Upgradeable Firearm Materials Pack</span> <span>70 TMT</span></div>
+                    <div class="price-item"><span>Weekly Deal Pack 1</span> <span>25 TMT</span></div>
+                    <div class="price-item"><span>Weekly Deal Pack 2</span> <span>60 TMT</span></div>
+                    <div class="price-item"><span>Weekly Mythic Emblem Value Pack</span> <span>60 TMT</span></div>
+                </div>
+            </div>
+
+            <div class="service-dropdown" id="brawl-dropdown">
+                <div class="service-header" onclick="toggleDropdown('brawl-dropdown')">
+                    <div class="service-header-content">
+                        <span class="service-icon">⭐</span>
+                        <span>Brawl Stars</span>
+                    </div>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="price-content">
+                    <div class="price-category">🎫 Пропуска и гемы:</div>
+                    <div class="price-item"><span>Brawl Pass</span> <span>220 тмт</span></div>
+                    <div class="price-item"><span>Brawl Pass Plus</span> <span>280 тмт</span></div>
+                    <div class="price-item"><span>30 гемов</span> <span>60 тмт</span></div>
+                    <div class="price-item"><span>60 гемов</span> <span>110 тмт</span></div>
+                    <div class="price-item"><span>80 гемов</span> <span>130 тмт</span></div>
+                    <div class="price-item"><span>110 гемов</span> <span>180 тмт</span></div>
+                    <div class="price-item"><span>360 гемов</span> <span>480 тмт</span></div>
+
+                    <div class="price-category">⚡️ Акционные уровни силы:</div>
+                    <div class="price-item"><span>7-й Уровень силы</span> <span>110 тмт</span></div>
+                    <div class="price-item"><span>9-й Уровень силы</span> <span>210 тмт</span></div>
+                    <div class="price-item"><span>11-й Уровень силы</span> <span>430 тмт</span></div>
+                    <div class="price-note">⚠️ Перед покупкой клиент должен подтвердить, что у него есть такая акция в игре!</div>
+                </div>
+            </div>
+
+            <div class="service-dropdown" id="tg-dropdown">
+                <div class="service-header" onclick="toggleDropdown('tg-dropdown')">
+                    <div class="service-header-content">
+                        <span class="service-icon">🎁</span>
+                        <span>Telegram Stars и Telegram Premium</span>
+                    </div>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="price-content">
+                    <div class="price-category">⭐ Telegram Stars (Звёзды):</div>
+                    <div class="price-item"><span>50 звёзд</span> <span>25 TMT</span></div>
+                    <div class="price-item"><span>75 звёзд</span> <span>35 TMT</span></div>
+                    <div class="price-item"><span>100 звёзд</span> <span>40 TMT</span></div>
+                    <div class="price-item"><span>150 звёзд</span> <span>60 TMT</span></div>
+                    <div class="price-item"><span>250 звёзд</span> <span>90 TMT</span></div>
+                    <div class="price-item"><span>500 звёзд</span> <span>180 TMT</span></div>
+
+                    <div class="price-category">💎 Telegram Premium:</div>
+                    <div class="price-item"><span>3 месяца</span> <span>260 TMT</span></div>
+                    <div class="price-item"><span>6 месяцев</span> <span>370 TMT</span></div>
+                    <div class="price-item"><span>1 год</span> <span>620 TMT</span></div>
+                    <div class="price-note">⚠️ Важно: перед покупкой убедитесь, что у вас нет активной подписки на данный момент, донат может не активироваться!</div>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <span class="service-icon">🏆</span>
+                <span>Услуги буста аккаунта (только Mobile Legends)</span>
+            </div>
+            <div class="service-item">
+                <span class="service-icon">🤖</span>
+                <span>Разработка и создание Telegram-ботов на заказ</span>
+            </div>
+        </div>
+
+        <a href="https://t.me/Organization_HD_bot" class="btn">Перейти в Telegram-бот</a>
+
+        <footer>
+            &copy; 2026 HD Organization
+        </footer>
+    </div>
+
+    <script>
+        function toggleDropdown(id) {
+            const element = document.getElementById(id);
+            element.classList.toggle('active');
+        }
+    </script>
+
+</body>
+</html>
